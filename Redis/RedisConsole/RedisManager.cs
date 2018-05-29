@@ -1,4 +1,5 @@
-﻿using ServiceStack.Redis;
+﻿using Microsoft.Extensions.Options;
+using ServiceStack.Redis;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,24 +8,23 @@ namespace RedisConsole
 {
     public class RedisManager
     {
-        /// <summary>
-        /// redis配置文件信息
-        /// </summary>
-        private static RedisConfigOption RedisConfigOption { get; set; }
+        public static RedisConfigOption RedisConfigOption;
 
         private static PooledRedisClientManager pooledRedisClientManager;
 
-        /// <summary>
-        /// 静态构造方法，初始化链接池管理对象
-        /// </summary>
         static RedisManager()
         {
+            RedisConfigOption = new RedisConfigOption()
+            {
+                AutoStart = true,
+                ReadOnlyHosts = new string[] { "121.41.55.42:6379" },
+                ReadWriteHosts = new string[] { "121.41.55.42:6379" },
+                MaxReadPoolSize = 1,
+                MaxWritePoolSize = 1
+            };
             CreateManager();
         }
 
-        /// <summary>
-        /// 创建链接池管理对象
-        /// </summary>
         private static void CreateManager()
         {
             pooledRedisClientManager = new PooledRedisClientManager(RedisConfigOption.ReadWriteHosts, RedisConfigOption.ReadOnlyHosts, new RedisClientManagerConfig
@@ -35,9 +35,6 @@ namespace RedisConsole
             });
         }
 
-        /// <summary>
-        /// 客户端缓存操作对象
-        /// </summary>
         public static IRedisClient GetClient()
         {
             if (pooledRedisClientManager == null)

@@ -13,19 +13,11 @@ namespace RedisConsole
                 Id = "a",
                 Name = "Test"
             };
-
-            var prcm = new PooledRedisClientManager(new string[] { "121.41.55.42:6379" }, new string[] { "121.41.55.42:6379" },
-                             new RedisClientManagerConfig
-                             {
-                                 MaxWritePoolSize = 20,
-                                 MaxReadPoolSize = 20,
-                                 AutoStart = true
-                             });
-
-            var client = prcm.GetClient();
-
-            client.StoreAsHash(people);
-            var a = client.GetFromHash<People>("a");
+            using (var client = RedisBase.RedisClient)
+            {
+                client.StoreAsHash(people);
+                var a = client.GetFromHash<People>("a");
+            }
 
             Console.WriteLine("Hello World!");
         }
