@@ -13,7 +13,7 @@ namespace RedisConsole
                 Id = "a",
                 Name = "Test"
             };
-            var client = RedisBase.RedisClient;
+            var client = RedisHelper.RedisClient;
 
             client.StoreAsHash(people);
 
@@ -29,7 +29,7 @@ namespace RedisConsole
                 Id = "a",
                 Name = "Test"
             };
-            var client = RedisBase.RedisClient;
+            var client = RedisHelper.RedisClient;
             client.StoreAsHash(people);
         }
     }
