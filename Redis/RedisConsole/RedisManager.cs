@@ -17,8 +17,8 @@ namespace RedisConsole
             RedisConfigOption = new RedisConfigOption()
             {
                 AutoStart = true,
-                ReadOnlyHosts = new string[] { "121.41.55.42:6379" },
-                ReadWriteHosts = new string[] { "121.41.55.42:6379" },
+                ReadOnlyHosts = new string[] { "127.0.0.1:6379" },
+                ReadWriteHosts = new string[] { "127.0.0.1:6379" },
                 MaxReadPoolSize = 1,
                 MaxWritePoolSize = 1
             };

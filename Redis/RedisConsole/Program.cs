@@ -13,13 +13,24 @@ namespace RedisConsole
                 Id = "a",
                 Name = "Test"
             };
-            using (var client = RedisBase.RedisClient)
-            {
-                client.StoreAsHash(people);
-                var a = client.GetFromHash<People>("a");
-            }
+            var client = RedisBase.RedisClient;
 
-            Console.WriteLine("Hello World!");
+            client.StoreAsHash(people);
+
+            Test();
+
+            Console.ReadKey();
+        }
+       static void Test()
+        {
+            People people = new People()
+            {
+                Age = 18,
+                Id = "a",
+                Name = "Test"
+            };
+            var client = RedisBase.RedisClient;
+            client.StoreAsHash(people);
         }
     }
     class People
