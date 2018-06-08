@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cache.Memcach\Cache.Memcach.csproj" />
+    <ProjectReference Include="..\Cache.Memcach\Cache.Memory.csproj" />
     <ProjectReference Include="..\Cache.Redis\Cache.Redis.csproj" />
   </ItemGroup>
 

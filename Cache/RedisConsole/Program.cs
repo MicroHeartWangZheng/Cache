@@ -17,11 +17,12 @@ namespace RedisConsole
 
             client.StoreAsHash(people);
 
+            people = client.GetFromHash<People>(people.Id);
             Test();
 
             Console.ReadKey();
         }
-       static void Test()
+        static void Test()
         {
             People people = new People()
             {
