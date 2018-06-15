@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Cache.Dome
 {
@@ -29,7 +30,13 @@ namespace Cache.Dome
         {
             services.AddMvc();
 
-            //读取配置
+            //手动配置
+            services.Configure<RedisConfigOptions>(r =>
+            {
+                r.AutoStart = true;
+                r.MaxReadPoolSize = 10;
+            });
+            //读取配置文件配置
             services.Configure<MemoryCacheOptions>(Configuration.GetSection("Cache:MemoryCacheOptions"));
             services.Configure<RedisConfigOptions>(Configuration.GetSection("Cache:RedisConfigOption"));
 
@@ -40,14 +47,14 @@ namespace Cache.Dome
             //    return new MemoryCacheManager(memoryCacheOptions);
             //});
 
-            services.AddSingleton<RedisManager>(x =>
-            {
-                var redisConfigOption = x.;
-                return new RedisManager(redisConfigOption);
-            });
+            var a = services.AddOptions<MemoryCacheOptions>().Name;
+            //services.AddSingleton<RedisManager>(x =>
+            //{
+            //    services.Con
+            //    return new RedisManager();
+            //});
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
