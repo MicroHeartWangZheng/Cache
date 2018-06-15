@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Cache.Memory;
+using Cache.Redis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Cache.Dome
 {
@@ -33,16 +29,22 @@ namespace Cache.Dome
         {
             services.AddMvc();
 
+            //读取配置
+            services.Configure<MemoryCacheOptions>(Configuration.GetSection("Cache:MemoryCacheOptions"));
+            services.Configure<RedisConfigOptions>(Configuration.GetSection("Cache:RedisConfigOption"));
 
-            services.Configure<MemoryCacheOptions>(Configuration.GetSection("MemoryCacheOptions")).AddSingleton<MemoryCacheOptions>();
+            //services.ConfigureOptions()
+            //services.AddSingleton<MemoryCacheManager>(x =>
+            //{
+            //    var memoryCacheOptions = x.GetService<MemoryCacheOptions>();
+            //    return new MemoryCacheManager(memoryCacheOptions);
+            //});
 
-            services.AddSingleton<MemoryCache>(x =>
+            services.AddSingleton<RedisManager>(x =>
             {
-                var memoryCacheOption = x.GetService<MemoryCacheOptions>();
-                return new MemoryCache(memoryCacheOption);
+                var redisConfigOption = x.;
+                return new RedisManager(redisConfigOption);
             });
-
-            services.Configure<TestOptions>(Configuration.GetSection("TestOptions")).AddSingleton<TestOptions>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

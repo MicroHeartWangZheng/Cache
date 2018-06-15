@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RedisConsole
+namespace Cache.Redis
 {
-    public class RedisConfigOption
+    public class RedisConfigOptions
     {
         public string[] ReadWriteHosts { get; set; }
 

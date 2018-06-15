@@ -44,5 +44,10 @@ namespace Cache.Memory
         {
             throw new NotImplementedException();
         }
+
+        public string Test()
+        {
+            return "abc";
+        }
     }
 }

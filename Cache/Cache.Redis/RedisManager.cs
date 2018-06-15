@@ -1,31 +1,23 @@
 ﻿using Microsoft.Extensions.Options;
 using ServiceStack.Redis;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RedisConsole
+namespace Cache.Redis
 {
-    public class RedisManager
+    public class RedisManager : IDisposable
     {
-        public static RedisConfigOption RedisConfigOption;
+        public readonly RedisConfigOptions RedisConfigOption;
 
-        private static PooledRedisClientManager pooledRedisClientManager;
+        private PooledRedisClientManager pooledRedisClientManager;
 
-        static RedisManager()
+        public IRedisClient RedisClient { get; set; }
+        public RedisManager(RedisConfigOptions redisConfigOption)
         {
-            RedisConfigOption = new RedisConfigOption()
-            {
-                AutoStart = true,
-                ReadOnlyHosts = new string[] { "127.0.0.1:6379" },
-                ReadWriteHosts = new string[] { "127.0.0.1:6379" },
-                MaxReadPoolSize = 1,
-                MaxWritePoolSize = 1
-            };
+            RedisConfigOption = redisConfigOption;
             CreateManager();
         }
 
-        private static void CreateManager()
+        private void CreateManager()
         {
             pooledRedisClientManager = new PooledRedisClientManager(RedisConfigOption.ReadWriteHosts, RedisConfigOption.ReadOnlyHosts, new RedisClientManagerConfig
             {
@@ -35,11 +27,21 @@ namespace RedisConsole
             });
         }
 
-        public static IRedisClient GetClient()
+        public IRedisClient GetClient()
         {
             if (pooledRedisClientManager == null)
                 CreateManager();
-            return pooledRedisClientManager.GetClient();
+
+            if (RedisClient == null)
+                return RedisClient = pooledRedisClientManager.GetClient();
+
+            return RedisClient;
+        }
+
+        public void Dispose()
+        {
+            RedisClient.Dispose();
+            RedisClient = null;
         }
     }
 }
