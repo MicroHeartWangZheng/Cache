@@ -11,9 +11,9 @@ namespace Cache.Redis
         private PooledRedisClientManager pooledRedisClientManager;
 
         public IRedisClient RedisClient { get; set; }
-        public RedisManager(RedisConfigOptions redisConfigOption)
+        public RedisManager(IOptions<RedisConfigOptions> redisConfigOption)
         {
-            RedisConfigOption = redisConfigOption;
+            RedisConfigOption = redisConfigOption.Value;
             CreateManager();
         }
 

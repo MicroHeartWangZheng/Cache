@@ -12,21 +12,17 @@ namespace Cache.Dome.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        public IOptions<RedisConfigOptions> RedisConfigOptions;
         public RedisManager RedisManager;
         public ValuesController(
-            IOptions<RedisConfigOptions> redisConfigOptions,
             RedisManager redisManager)
         {
-            this.RedisConfigOptions = redisConfigOptions;
             this.RedisManager = redisManager;
         }
 
         [HttpGet]
         public IEnumerable<string> Get()
         {
-
-            var a = RedisConfigOptions.Value.ReadOnlyHosts;
+            RedisManager.RedisClient.Add("abc", "123");
             return new string[] { "value1", "value2" };
         }
 

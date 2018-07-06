@@ -37,22 +37,9 @@ namespace Cache.Dome
                 r.MaxReadPoolSize = 10;
             });
             //读取配置文件配置
-            services.Configure<MemoryCacheOptions>(Configuration.GetSection("Cache:MemoryCacheOptions"));
+            //services.Configure<MemoryCacheOptions>(Configuration.GetSection("Cache:MemoryCacheOptions"));
             services.Configure<RedisConfigOptions>(Configuration.GetSection("Cache:RedisConfigOption"));
 
-            //services.ConfigureOptions()
-            //services.AddSingleton<MemoryCacheManager>(x =>
-            //{
-            //    var memoryCacheOptions = x.GetService<MemoryCacheOptions>();
-            //    return new MemoryCacheManager(memoryCacheOptions);
-            //});
-
-            var a = services.AddOptions<MemoryCacheOptions>().Name;
-            //services.AddSingleton<RedisManager>(x =>
-            //{
-            //    services.Con
-            //    return new RedisManager();
-            //});
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
