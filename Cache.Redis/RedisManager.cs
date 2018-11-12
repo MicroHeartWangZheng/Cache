@@ -30,6 +30,7 @@ namespace Cache.Redis
                     return;
                 var json = _serializer.Serialize(data);
                 database.HashSet(RedisKeyOptions.RedisKey, key, json);
+                database.KeyExpire(RedisKeyOptions.RedisKey, new TimeSpan(0, 0, cacheTime));
             });
         }
 
