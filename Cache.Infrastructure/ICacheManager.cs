@@ -24,7 +24,7 @@ namespace Cache.Infrastructure
         /// 判断指定的对象是否已存在于缓存之中
         /// </summary>
         /// <param name="key">缓存键名</param>
-        bool IsSet(string key);
+        bool IsExist(string key);
 
         /// <summary>
         /// 删除指定的缓存对象

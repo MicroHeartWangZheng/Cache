@@ -15,6 +15,7 @@ namespace Cache.Memory
         {
             memoryCache = new MemoryCache(options);
         }
+
         public void Add<T>(string key, T data, int cacheTime)
         {
             throw new NotImplementedException();
@@ -30,7 +31,7 @@ namespace Cache.Memory
             throw new NotImplementedException();
         }
 
-        public bool IsSet(string key)
+        public bool IsExist(string key)
         {
             throw new NotImplementedException();
         }
