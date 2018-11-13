@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cache.Infrastructure;
 using Cache.Memory;
+using Cache.Redis;
+using Cache.Tools;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using StackExchange.Redis;
 
 namespace Cache.Dome
 {
@@ -31,7 +34,11 @@ namespace Cache.Dome
 
             services.Configure<MemoryCacheOptions>(Configuration.GetSection("MemoryCacheOptions"));
 
-            services.AddSingleton<ICacheManager, MemoryCacheManager>();
+            services.AddSingleton<ISerializationService, SerializationService>();
+            services.Configure<ConfigurationOptions>(Configuration.GetSection("ConfigurationOptions"));
+            services.Configure<RedisKeyOptions>(Configuration.GetSection("RedisKeyOptions"));
+
+            services.AddSingleton<ICacheManager, RedisManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
