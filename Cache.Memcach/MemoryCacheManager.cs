@@ -12,7 +12,7 @@ namespace Cache.Memory
 {
     public class MemoryCacheManager : ICacheManager
     {
-        MemoryCache MemoryCache;
+        private MemoryCache MemoryCache;
 
         public MemoryCacheManager(IOptions<MemoryCacheOptions> options)
         {
@@ -29,15 +29,18 @@ namespace Cache.Memory
             {
                 MemoryCache.Set(key, data, new MemoryCacheEntryOptions()
                 {
-                    SlidingExpiration = new TimeSpan(0, 0, cacheTime)
+                    SlidingExpiration = new TimeSpan(0, 0, cacheTime),
+                    Priority = CacheItemPriority.NeverRemove
                 });
             }
-
         }
 
         public void Clear()
         {
-            MemoryCache.Compact(1d);//删除所有
+            foreach (var key in GetCacheKeys())
+            {
+                Remove(key);
+            }
         }
 
         public T Get<T>(string key)

@@ -17,11 +17,18 @@ namespace Cache.Dome.Controllers
         {
             this._cacheManager = cacheManager;
         }
-        // GET api/values
+
         [HttpGet]
-        public ActionResult<string> Get()
+        public void Get()
         {
-            _cacheManager.Add<string>("key", "vale", 4);
+            _cacheManager.Add<string>("key2", "valeuse", 4);
+            _cacheManager.Clear();
+        }
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public ActionResult<string> Get(int id)
+        {
+            _cacheManager.Add<string>("key", "vale", id);
 
             Thread.Sleep(2000);
             var string2= _cacheManager.Get<string>("key");
@@ -31,13 +38,6 @@ namespace Cache.Dome.Controllers
             var string10 = _cacheManager.Get<string>("key");
 
             return $@"string2:{string2}  string5:{string5}   string10:{string10}";
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
         }
 
         // POST api/values
