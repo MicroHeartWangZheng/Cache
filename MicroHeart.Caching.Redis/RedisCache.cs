@@ -1,15 +1,12 @@
-﻿using Microsoft.Extensions.Options;
-using StackExchange.Redis;
+﻿using StackExchange.Redis;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MicroHeart.Caching.Redis
 {
     public class RedisCache : RedisBaseCache, IRedisCache
     {
-        public RedisCache(IOptions<ConfigurationOptions> optionsAccessor) : base(optionsAccessor)
+        public RedisCache(ConfigurationOptions options) : base(options)
         {
         }
 
@@ -19,8 +16,7 @@ namespace MicroHeart.Caching.Redis
             return func(Cache);
         }
 
-
-        public async Task<T> Execute<T>(Func<IDatabase, Task<T>> func)
+        public async Task<T> ExecuteAsync<T>(Func<IDatabase, Task<T>> func)
         {
             await ConnectAsync();
             return await func(Cache);

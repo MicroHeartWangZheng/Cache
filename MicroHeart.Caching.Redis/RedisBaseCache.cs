@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Options;
-using StackExchange.Redis;
+﻿using StackExchange.Redis;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,16 +7,17 @@ namespace MicroHeart.Caching.Redis
 {
     public abstract class RedisBaseCache
     {
-        private volatile ConnectionMultiplexer _connection;
         protected IDatabase Cache;
-        private readonly ConfigurationOptions option;
 
+        private volatile ConnectionMultiplexer _connection;
+        private readonly ConfigurationOptions option;
         private readonly SemaphoreSlim _connectionLock = new SemaphoreSlim(initialCount: 1, maxCount: 1);
-        public RedisBaseCache(IOptions<ConfigurationOptions> optionsAccessor)
+
+        public RedisBaseCache(ConfigurationOptions options)
         {
-            if (optionsAccessor == null)
-                throw new ArgumentNullException(nameof(optionsAccessor));
-            option = optionsAccessor.Value;
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+            this.option = options;
         }
 
         protected void Connect()

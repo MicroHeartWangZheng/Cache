@@ -9,18 +9,27 @@ namespace MicroHeart.Caching.Test.Controllers
     public class WeatherForecastController : ControllerBase
     {
 
-        public IDistributedCache _cache;
-        public WeatherForecastController(IDistributedCache cache)
+        public IRedisCache _cache;
+        public WeatherForecastController(IRedisCache cache)
         {
             this._cache = cache;
 
-            _cache.SetString("key", "value");
-             _cache.Get("key");
+            _cache.
+            _cache.Execute(x =>
+            {
+                return x.StringSet("key", "value");
+            });
+
+
         }
 
         [HttpGet]
-        public void Get()
+        public string Get()
         {
+            return _cache.Execute<string>(x =>
+            {
+                return x.StringGet("key");
+            });
         }
     }
 }

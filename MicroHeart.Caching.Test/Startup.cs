@@ -26,10 +26,7 @@ namespace MicroHeart.Caching.Test
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOptions();
-            services.Configure<ConfigurationOptions>(Configuration.GetSection("Redis"));
-            services.AddSingleton<IDistributedCache, RedisStringCache>();
-
+            services.AddRedisCache("RedisConnectionString");
             services.AddControllers();
         }
 
