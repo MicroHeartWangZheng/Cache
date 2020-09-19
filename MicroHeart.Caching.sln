@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroHeart.Caching.Redis", "MicroHeart.Caching.Redis\MicroHeart.Caching.Redis.csproj", "{1A791B25-2531-48D2-9EC7-73EF39D359D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroHeart.Caching.Test", "MicroHeart.Caching.Test\MicroHeart.Caching.Test.csproj", "{4BA3F493-BCFA-453B-9095-547E271D2886}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroHeart.Caching.MongoDB", "MicroHeart.Caching.MongoDB\MicroHeart.Caching.MongoDB.csproj", "{95D9B33E-6D5F-4076-BE2B-F4630B4115AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroHeart.Caching.Memcached", "MicroHeart.Caching.Memcached\MicroHeart.Caching.Memcached.csproj", "{1AC98080-FEB5-4EB8-98A3-4F78EE356BE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A791B25-2531-48D2-9EC7-73EF39D359D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A791B25-2531-48D2-9EC7-73EF39D359D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A791B25-2531-48D2-9EC7-73EF39D359D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A791B25-2531-48D2-9EC7-73EF39D359D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BA3F493-BCFA-453B-9095-547E271D2886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BA3F493-BCFA-453B-9095-547E271D2886}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BA3F493-BCFA-453B-9095-547E271D2886}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BA3F493-BCFA-453B-9095-547E271D2886}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95D9B33E-6D5F-4076-BE2B-F4630B4115AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95D9B33E-6D5F-4076-BE2B-F4630B4115AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95D9B33E-6D5F-4076-BE2B-F4630B4115AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95D9B33E-6D5F-4076-BE2B-F4630B4115AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AC98080-FEB5-4EB8-98A3-4F78EE356BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AC98080-FEB5-4EB8-98A3-4F78EE356BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AC98080-FEB5-4EB8-98A3-4F78EE356BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AC98080-FEB5-4EB8-98A3-4F78EE356BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3B57414-1B38-4493-98B2-8F9202186113}
+	EndGlobalSection
+EndGlobal
